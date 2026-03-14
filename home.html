@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guitar Tuning Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
@@ -11,7 +12,7 @@
             height: 100vh;
             overflow: hidden;
             background-color: black;
-            font-family: Arial, sans-serif;
+            font-family: 'Metal Mania', cursive;
         }
         .container {
             display: flex;
@@ -40,13 +41,16 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: purple;
-            font-size: 24px;
+            font-size: 28px;
             opacity: 0;
             transition: opacity 0.3s;
             pointer-events: none;
             text-align: center;
-            line-height: 1.5;
+            line-height: 1.2;
+            background: linear-gradient(45deg, #800080, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px #800080;
         }
         .left:hover .text {
             opacity: 1;
