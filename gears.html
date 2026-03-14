@@ -5,45 +5,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gears & Tools</title>
     <link href="https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            overflow: hidden;
-            background-color: black;
             font-family: 'Metal Mania', cursive;
-            display: flex;
+        }
+        .artist-card {
+            transition: transform 0.2s;
+        }
+        .artist-card:hover {
+            transform: scale(1.05);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 50;
             justify-content: center;
             align-items: center;
-            color: purple;
+        }
+        .modal-content {
+            background: #1f1f1f;
+            border: 2px solid purple;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 500px;
+            width: 90%;
             text-align: center;
-        }
-        .content {
-            background: linear-gradient(45deg, #800080, #ff00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 10px #800080;
-            font-size: 48px;
-        }
-        .back {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            color: purple;
-            text-decoration: none;
-            font-size: 18px;
         }
     </style>
 </head>
-<body>
-    <a href="home.html" class="back">BACK</a>
-    <div class="content">
-        GEARS<br>
-        &<br>
-        TOOLS<br>
-        <br>
-        (Coming Soon)
+<body class="bg-black text-white overflow-auto">
+    <a href="home.html" class="absolute top-4 left-4 text-purple-400 hover:text-purple-300 z-10">← BACK</a>
+    
+    <div class="min-h-screen flex flex-col items-center justify-center p-8">
+        <h1 class="text-5xl font-bold mb-8 text-center" style="background: linear-gradient(45deg, #800080, #ff00ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">GEARS & TOOLS</h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl">
+            <div class="artist-card bg-zinc-900 border border-purple-500 rounded-lg p-6 text-center cursor-pointer" onclick="openModal('Deftones')">
+                <img src="logos/deftones.png" alt="Deftones" class="w-32 h-32 mx-auto mb-4 object-contain">
+                <h2 class="text-2xl text-purple-400">Deftones</h2>
+            </div>
+            <div class="artist-card bg-zinc-900 border border-purple-500 rounded-lg p-6 text-center cursor-pointer" onclick="openModal('Korn')">
+                <img src="logos/korn.png" alt="Korn" class="w-32 h-32 mx-auto mb-4 object-contain">
+                <h2 class="text-2xl text-purple-400">Korn</h2>
+            </div>
+            <div class="artist-card bg-zinc-900 border border-purple-500 rounded-lg p-6 text-center cursor-pointer" onclick="openModal('Slipknot')">
+                <img src="logos/slipknot.jpg" alt="Slipknot" class="w-32 h-32 mx-auto mb-4 object-contain">
+                <h2 class="text-2xl text-purple-400">Slipknot</h2>
+            </div>
+            <div class="artist-card bg-zinc-900 border border-purple-500 rounded-lg p-6 text-center cursor-pointer" onclick="openModal('Metallica')">
+                <img src="logos/metallica.png" alt="Metallica" class="w-32 h-32 mx-auto mb-4 object-contain">
+                <h2 class="text-2xl text-purple-400">Metallica</h2>
+            </div>
+            <div class="artist-card bg-zinc-900 border border-purple-500 rounded-lg p-6 text-center cursor-pointer" onclick="openModal('Gojira')">
+                <img src="logos/gojira.jpg" alt="Gojira" class="w-32 h-32 mx-auto mb-4 object-contain">
+                <h2 class="text-2xl text-purple-400">Gojira</h2>
+            </div>
+        </div>
     </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <button onclick="closeModal()" class="absolute top-2 right-2 text-purple-400 hover:text-purple-300 text-2xl">&times;</button>
+            <h2 id="modal-title" class="text-3xl text-purple-400 mb-6"></h2>
+            <div class="space-y-4">
+                <button class="w-full bg-purple-600 hover:bg-purple-500 py-3 rounded-lg text-lg">Songs</button>
+                <button class="w-full bg-purple-600 hover:bg-purple-500 py-3 rounded-lg text-lg">Tunings</button>
+                <button class="w-full bg-purple-600 hover:bg-purple-500 py-3 rounded-lg text-lg">Gears</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(artist) {
+            document.getElementById('modal-title').textContent = artist;
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
 </body>
 </html>
