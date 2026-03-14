@@ -33,9 +33,13 @@
             border: 2px solid purple;
             border-radius: 10px;
             padding: 20px;
-            max-width: 500px;
-            width: 90%;
+            max-width: 700px;
+            width: 95%;
             text-align: center;
+        }
+
+        #modal-body::-webkit-scrollbar {
+            display: none;
         }
     </style>
 </head>
@@ -73,17 +77,57 @@
         <div class="modal-content">
             <button onclick="closeModal()" class="absolute top-2 right-2 text-purple-400 hover:text-purple-300 text-2xl">&times;</button>
             <h2 id="modal-title" class="text-3xl text-purple-400 mb-6"></h2>
-            <div class="space-y-4">
-                <button class="w-full bg-purple-600 hover:bg-purple-500 py-3 rounded-lg text-lg">Songs</button>
-                <button class="w-full bg-purple-600 hover:bg-purple-500 py-3 rounded-lg text-lg">Tunings</button>
-                <button class="w-full bg-purple-600 hover:bg-purple-500 py-3 rounded-lg text-lg">Gears</button>
-            </div>
+            <div id="modal-body" class="space-y-4 max-h-[500px] overflow-y-auto"></div>
         </div>
     </div>
 
     <script>
+        const artistData = {
+            'Deftones': [
+                { song: 'My Own Summer (Shove It)', album: 'Around the Fur', year: 1997, tuning: '(C# G# C# F# A# D#)' },
+                { song: 'Be Quiet and Drive (Far Away)', album: 'Around the Fur', year: 1997, tuning: '(C# G# C# F# A# D#)' },
+                { song: 'Digital Bath', album: 'White Pony', year: 2000, tuning: '(C G C F A D)' },
+                { song: 'Change (In the House of Flies)', album: 'White Pony', year: 2000, tuning: '(C G C F A D)' },
+                { song: 'Cherry Waves', album: 'Saturday Night Wrist', year: 2006, tuning: 'on 7 strings (F# C# F# B E G# C#)' },
+                { song: 'Kimdracula', album: 'Saturday Night Wrist', year: 2006, tuning: 'on 7 strings (F# C# F# B E G# C#)' },
+                { song: 'Leathers', album: 'Koi No Yokan', year: 2012, tuning: 'on 8 strings (E B E A D G B E)' },
+                { song: 'Entombed', album: 'Koi No Yokan', year: 2012, tuning: 'on 8 strings (E B E A D G B E)' },
+                { song: 'Rosemary', album: 'Koi No Yokan', year: 2012, tuning: '(A# G C F A D)' },
+                { song: 'Battle‑Axe', album: 'Deftones', year: 2003, tuning: '(C# G# C# F# A# D#)' },
+                { song: 'My Mind Is a Mountain', album: 'Private Music', year: 2025, tuning: '(C G C F A D)' },
+                { song: 'Genesis', album: 'Ohms', year: 2020, tuning: '(C G C F A D)' },
+                { song: '(L)MIRL', album: 'Gore', year: 2016, tuning: '(E A D G B E)' },
+                { song: 'Sextape', album: 'Diamond Eyes', year: 2010, tuning: '(C G C F A D)' },
+                { song: 'Dai the Flu', album: 'Around the Fur', year: 1997, tuning: '(D# G# C# F# A# D#)' },
+                { song: 'Elite', album: 'White Pony', year: 2000, tuning: '(C G C F A D)' },
+                { song: 'Rx Queen', album: 'White Pony', year: 2000, tuning: '(C G C F A D)' },
+                { song: 'Ceremony', album: 'Ohms', year: 2020, tuning: 'on 8 strings (F# B E A D G B E)' },
+                { song: 'Lotion', album: 'Around the Fur', year: 1997, tuning: '(C# G# C# F# A# D#)' },
+                { song: 'Mascara', album: 'Around the Fur', year: 1997, tuning: '(D# G# C# F# A# D#)' },
+                { song: 'Prince', album: 'Diamond Eyes', year: 2010, tuning: 'on 8 strings (F# B E A D G B E)' },
+                { song: 'Poltergeist', album: 'Koi No Yokan', year: 2012, tuning: 'on 8 strings (E B E A D G B E)' },
+                { song: 'Minerva', album: 'Deftones', year: 2003, tuning: '(C# G# C# F# A# D#)' }
+            ]
+        };
+
         function openModal(artist) {
             document.getElementById('modal-title').textContent = artist;
+            const body = document.getElementById('modal-body');
+            if (artistData[artist]) {
+                body.innerHTML = artistData[artist].map(item => `
+                    <div class="bg-zinc-800 p-4 rounded-lg">
+                        <div class="text-lg font-bold text-white">${item.song}</div>
+                        <div class="text-sm text-zinc-400">${item.album} (${item.year})</div>
+                        <div class="text-sm text-purple-400">${item.tuning}</div>
+                    </div>
+                `).join('');
+            } else {
+                body.innerHTML = `
+                    <button class="w-full bg-purple-600 hover:bg-purple-500 py-3 rounded-lg text-lg">Songs</button>
+                    <button class="w-full bg-purple-600 hover:bg-purple-500 py-3 rounded-lg text-lg">Tunings</button>
+                    <button class="w-full bg-purple-600 hover:bg-purple-500 py-3 rounded-lg text-lg">Gears</button>
+                `;
+            }
             document.getElementById('modal').style.display = 'flex';
         }
 
