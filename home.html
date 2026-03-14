@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guitar Tuning Home</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            background-color: black;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+        }
+        .left, .right {
+            flex: 1;
+            position: relative;
+            cursor: pointer;
+        }
+        .center {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 2px;
+            height: 100vh;
+            background-color: white;
+            transform: translateX(-50%);
+            opacity: 1;
+            transition: opacity 0.3s;
+            box-shadow: 0 0 10px white;
+        }
+        .text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: purple;
+            font-size: 24px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            text-align: center;
+            line-height: 1.5;
+        }
+        .left:hover .text {
+            opacity: 1;
+        }
+        .right:hover .text {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <div class="text">TUNER<br>&<br>DROP TUNING</div>
+        </div>
+        <div class="center"></div>
+        <div class="right">
+            <div class="text">GEARS<br>&<br>TOOLS</div>
+        </div>
+    </div>
+    <script>
+        const left = document.querySelector('.left');
+        const right = document.querySelector('.right');
+        const center = document.querySelector('.center');
+
+        left.addEventListener('mouseenter', () => center.style.opacity = '0');
+        left.addEventListener('mouseleave', () => center.style.opacity = '1');
+        right.addEventListener('mouseenter', () => center.style.opacity = '0');
+        right.addEventListener('mouseleave', () => center.style.opacity = '1');
+    </script>
+</body>
+</html>
